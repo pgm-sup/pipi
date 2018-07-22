@@ -3,6 +3,10 @@ package com.wyc.entity;
 import java.io.Serializable;
 
 public class Permission implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long permissionId;
 	private String permissionDesc;
 	private String url;

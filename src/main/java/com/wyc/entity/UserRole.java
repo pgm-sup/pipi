@@ -3,6 +3,10 @@ package com.wyc.entity;
 import java.io.Serializable;
 
 public class UserRole implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long userId;
 	private Long roleId;
 	

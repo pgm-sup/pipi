@@ -12,6 +12,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.wyc.entity.Navigation;
 import com.wyc.service.UserService;
 
 public class WithNavibarFormAuthenticationFilter extends FormAuthenticationFilter {
@@ -25,7 +26,7 @@ public class WithNavibarFormAuthenticationFilter extends FormAuthenticationFilte
 		HttpServletRequest httpReq=(HttpServletRequest)request;
 		
 		String userName=(String)SecurityUtils.getSubject().getPrincipal();
-		List navigationBar=userService.getNavigationBar(userName);
+		List<Navigation> navigationBar=userService.getNavigationBar(userName);
 		httpReq.getSession().setAttribute("navibar", navigationBar);
 		return super.onLoginSuccess(token, subject, request, response);
 	}
