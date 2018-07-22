@@ -34,9 +34,9 @@ public class UserController {
 		String error=null;
 		String exceptionClassName = (String)req.getAttribute("shiroLoginFailure");
         if(UnknownAccountException.class.getName().equals(exceptionClassName)) {
-            error = "账号/密码错误!";
+            error = "账号错误!";
         } else if(IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
-            error = "账号/密码错误!";
+            error = "密码错误!";
         } else if(exceptionClassName != null) {
             error = "登录异常" + exceptionClassName;
         }

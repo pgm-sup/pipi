@@ -18,14 +18,13 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.wyc.entity.LogEntity;
-import com.wyc.entity.User;
-import com.wyc.service.LogServiceImpl;
+import com.wyc.service.LogService;
 
 @Aspect
 public class LogAopAction {
     //注入service,用来将日志信息保存在数据库
     @Autowired
-    private LogServiceImpl logservice;
+    private LogService logservice;
     
      //配置接入点,如果不知道怎么配置,可以百度一下规则
      @Pointcut("execution(* com.wyc.controller..*.*(..))")  

@@ -1,5 +1,7 @@
 package com.wyc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,10 @@ public class LogServiceImpl implements LogService {
 	@Override
 	public void saveLog(LogEntity log) {
 		logMapper.saveLog(log);	
+	}
+	@Override
+	public List<LogEntity> getAllLogs() {
+		return logMapper.getAllLogs();
 	}
 
 }

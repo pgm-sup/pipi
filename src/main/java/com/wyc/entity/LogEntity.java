@@ -7,6 +7,8 @@ public class LogEntity implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	// logid
+	private int id;
 	// 用户
 	private String username;
 	// 执行模块
@@ -21,6 +23,13 @@ public class LogEntity implements Serializable{
 	private String data;
 	// 执行描述
 	private String comment;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getUsername() {
 		return username;
@@ -63,6 +72,11 @@ public class LogEntity implements Serializable{
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	@Override
+	public String toString() {
+		return "LogEntity [id=" + id + ", username=" + username + ", module=" + module + ", method=" + method
+				+ ", response_data=" + response_data + ", ip=" + ip + ", data=" + data + ", comment=" + comment + "]";
 	}
 	
 	
