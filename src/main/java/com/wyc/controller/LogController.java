@@ -11,6 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.wyc.entity.LogEntity;
 import com.wyc.log.SystemLog;
 import com.wyc.service.LogService;
+
+/**
+ * Éó¼Æ¿ØÖÆÆ÷
+ * @author haima
+ *
+ */
 @Controller
 @RequestMapping("/audit")
 public class LogController {

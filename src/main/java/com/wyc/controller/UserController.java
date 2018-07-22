@@ -19,6 +19,11 @@ import com.wyc.log.SystemLog;
 import com.wyc.service.RoleService;
 import com.wyc.service.UserService;
 
+/**
+ * 用户控制器
+ * @author haima
+ *
+ */
 @Controller
 @RequestMapping("/user")
 public class UserController {

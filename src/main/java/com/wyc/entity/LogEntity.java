@@ -2,6 +2,11 @@ package com.wyc.entity;
 
 import java.io.Serializable;
 
+/**
+ * …Ûº∆
+ * @author haima
+ *
+ */
 public class LogEntity implements Serializable{
 	/**
 	 * 

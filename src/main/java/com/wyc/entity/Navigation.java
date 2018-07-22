@@ -2,6 +2,11 @@ package com.wyc.entity;
 
 import java.util.List;
 
+/**
+ * µ¼º½½Úµã
+ * @author haima
+ *
+ */
 public class Navigation {
 	private String navigationName;
 	private List<Permission> childNavigations;

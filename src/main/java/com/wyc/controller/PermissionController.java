@@ -13,6 +13,12 @@ import com.wyc.entity.Permission;
 import com.wyc.log.SystemLog;
 import com.wyc.service.PermissionService;
 
+
+/**
+ * È¨ÏÞ¿ØÖÆÆ÷
+ * @author haima
+ *
+ */
 @Controller
 @RequestMapping("/perm")
 public class PermissionController {

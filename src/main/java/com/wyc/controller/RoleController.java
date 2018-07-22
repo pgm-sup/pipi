@@ -15,6 +15,12 @@ import com.wyc.log.SystemLog;
 import com.wyc.service.PermissionService;
 import com.wyc.service.RoleService;
 
+
+/**
+ * ½ÇÉ«¿ØÖÆÆ÷
+ * @author haima
+ *
+ */
 @Controller
 @RequestMapping("/role")
 public class RoleController {
