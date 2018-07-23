@@ -21,7 +21,9 @@ public class WebContextListener implements InitializingBean, ServletContextAware
 	@Override
 	public void setServletContext(ServletContext servletContext) {
 		try {
-			System.out.println("Æô¶¯±ãÖ´ÐÐ´úÂë");
+//			String result = HttpUtils.doPost(url, params)("http://127.0.0.1:8081/login", "username=admin&password=123456");
+
+//			System.out.println(result);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

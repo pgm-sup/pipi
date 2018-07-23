@@ -1,5 +1,6 @@
 package com.wyc.shiro.filter;
 
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.wyc.entity.Navigation;
 import com.wyc.service.UserService;
+import com.wyc.utils.HttpInvoker;
 
 public class WithNavibarFormAuthenticationFilter extends FormAuthenticationFilter {
 
@@ -30,5 +32,4 @@ public class WithNavibarFormAuthenticationFilter extends FormAuthenticationFilte
 		httpReq.getSession().setAttribute("navibar", navigationBar);
 		return super.onLoginSuccess(token, subject, request, response);
 	}
-
 }

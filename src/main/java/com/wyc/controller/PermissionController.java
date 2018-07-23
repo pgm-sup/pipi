@@ -42,6 +42,7 @@ public class PermissionController {
 	@ResponseBody
 	@SystemLog(module = "权限管理", methods = "添加权限")
 	public Permission addPermission(Permission permission){
+		
 		permissionService.addPermission(permission);
 		return permission;
 	}
