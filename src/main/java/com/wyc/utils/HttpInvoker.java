@@ -7,8 +7,11 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -75,6 +78,7 @@ public class HttpInvoker
 		return null;
  
 	}
+	
  
 	/**
 	 * http url request with parameter map
@@ -84,13 +88,16 @@ public class HttpInvoker
 	 * @return OutputStream
 	 */
 	public static OutputStream doPostWithUrlParams(String url,
-			Map<String , Object> parameterMap)
+			Map<String , String[]> parameterMap)
 	{
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		for (Map.Entry<String , Object> element : parameterMap.entrySet())
+		for (Map.Entry<String , String[]> element : parameterMap.entrySet())
 		{
-			nameValuePairs.add(new BasicNameValuePair(element.getKey(), String
-					.valueOf(element.getValue())));
+			for(String v : element.getValue()) {
+				nameValuePairs.add(new BasicNameValuePair(element.getKey(), String
+						.valueOf(v)));
+			}
+			
 		}
 		try
 		{
@@ -101,7 +108,11 @@ public class HttpInvoker
 		}
 		return null;
 	}
- 
+
+	
+	
+
+
 	/**
 	 * post方式写对象流到服务端
 	 * 
@@ -137,6 +148,9 @@ public class HttpInvoker
 	{
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);
+		post.addHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
+		post.addHeader("X-Requested-With","XMLHttpRequest");
+
 		OutputStream os = null;
 		post.setEntity(entity);
 		try
