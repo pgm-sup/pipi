@@ -15,17 +15,21 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.wyc.log.SystemLog;
 import com.wyc.utils.HttpInvoker;
 
 @Controller
 @RequestMapping("/*")
 public class PipiHelpController2 {
 	
-	@RequestMapping(value = "")
+	@RequestMapping(value = "/help")
+	@RequiresPermissions("	*:help")
+	@SystemLog(module = "pipiJob帮助文档", methods = "查看pipiJob帮助文档")
 	public void getPipiJobTaskList(HttpServletRequest request, HttpServletResponse response) {
 		String uri = request.getRequestURI();
 		Map<String, String[]> parameterMap = request.getParameterMap();
@@ -60,16 +64,16 @@ public class PipiHelpController2 {
 				}
 			}
 			System.out.println("http://192.168.1.39:8080" + uri + "?" + prestr);
-			out1 = (ByteArrayOutputStream) (HttpInvoker.doGet("http://192.168.1.39:8080" + uri + "?" + prestr));
+			out1 = (ByteArrayOutputStream) (HttpInvoker.doGet("http://192.168.1.104:8080" + uri + "?" + prestr));
 		} else {
 		
-			out1 = (ByteArrayOutputStream) (HttpInvoker.doPostWithUrlParams("http://192.168.1.39:8080" + uri,
+			out1 = (ByteArrayOutputStream) (HttpInvoker.doPostWithUrlParams("http://192.168.1.104:8080" + uri,
 					parameterMap));
 			System.out.println(1111);
 		}
 
 		response.setContentType("text/html;charset=utf-8");
-		System.out.println("http://192.168.1.39:8080" + uri + "?" + prestr);
+		System.out.println("http://192.168.1.104:8080" + uri + "?" + prestr);
 		try {
 			OutputStream out = response.getOutputStream();
 			out.write(out1.toByteArray());
