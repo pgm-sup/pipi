@@ -75,7 +75,7 @@
         <property name="usernameParam" value="username"/>
         <property name="passwordParam" value="password"/>
         <property name="rememberMeParam" value="rememberMe"/>
-        <property name="loginUrl" value="/user/login"/>
+        <!-- <property name="loginUrl" value="/user/login"/> -->
     </bean>
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -92,7 +92,7 @@
                 /index=authc
                 /user/login=authc<!-- 使用authc -->
                 /logout=logout
-                /static/**=anon<!-- 静态资源文件访问 -->
+                /static/**=anon<!-- 静态资源文件 问 -->
                 /**=user
             </value>
         </property>

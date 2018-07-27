@@ -64,16 +64,16 @@ public class PipiHelpController2 {
 				}
 			}
 			System.out.println("http://192.168.1.39:8080" + uri + "?" + prestr);
-			out1 = (ByteArrayOutputStream) (HttpInvoker.doGet("http://192.168.1.104:8080" + uri + "?" + prestr));
+			out1 = (ByteArrayOutputStream) (HttpInvoker.doGet("http://100.124.10.6:10725" + uri + "?" + prestr));
 		} else {
 		
-			out1 = (ByteArrayOutputStream) (HttpInvoker.doPostWithUrlParams("http://192.168.1.104:8080" + uri,
+			out1 = (ByteArrayOutputStream) (HttpInvoker.doPostWithUrlParams("http://100.124.10.6:10725" + uri,
 					parameterMap));
 			System.out.println(1111);
 		}
 
 		response.setContentType("text/html;charset=utf-8");
-		System.out.println("http://192.168.1.104:8080" + uri + "?" + prestr);
+		System.out.println("http://100.124.10.6:10725" + uri + "?" + prestr);
 		try {
 			OutputStream out = response.getOutputStream();
 			out.write(out1.toByteArray());

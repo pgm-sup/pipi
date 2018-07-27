@@ -1,6 +1,5 @@
 package com.wyc.shiro.filter;
 
-import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.wyc.entity.Navigation;
 import com.wyc.service.UserService;
-import com.wyc.utils.HttpInvoker;
 
 public class WithNavibarFormAuthenticationFilter extends FormAuthenticationFilter {
 
@@ -25,14 +23,20 @@ public class WithNavibarFormAuthenticationFilter extends FormAuthenticationFilte
 	@Override
 	protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request,
 			ServletResponse response) throws Exception {
-		HttpServletRequest httpReq=(HttpServletRequest)request;
-		System.out.println(SecurityUtils.getSubject().hasRole(""));		
-		System.out.println(httpReq.getRequestURI());
-		System.out.println(httpReq.getSession().getAttribute("user"));
-		System.out.println(SecurityUtils.getSubject().hasRole("operatAdmin"));
+		HttpServletRequest httpReq=(HttpServletRequest)request;;
 		String userName=(String)SecurityUtils.getSubject().getPrincipal();
 		List<Navigation> navigationBar=userService.getNavigationBar(userName);
 		httpReq.getSession().setAttribute("navibar", navigationBar);
 		return super.onLoginSuccess(token, subject, request, response);
 	}
+	
+    @Override
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)
+    {
+        if(isLoginRequest(request, response) && isLoginSubmission(request, response)){  
+ 
+            return false;  
+        }  
+        return super.isAccessAllowed(request, response, mappedValue);
+    }
 }

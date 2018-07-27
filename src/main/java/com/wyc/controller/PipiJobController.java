@@ -24,7 +24,7 @@ public class PipiJobController {
 	public void getPipiJonIndex(HttpServletResponse response) {
 		
 		
-		ByteArrayOutputStream out1 = (ByteArrayOutputStream)(HttpInvoker.doGet("http://192.168.1.104:8080/"));
+		ByteArrayOutputStream out1 = (ByteArrayOutputStream)(HttpInvoker.doGet("http://100.124.10.6:10725/"));
 		
 		response.setContentType("text/html;charset=utf-8");
 		try {

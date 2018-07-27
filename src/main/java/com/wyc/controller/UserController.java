@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mysql.jdbc.StringUtils;
 import com.wyc.entity.Role;
 import com.wyc.entity.User;
 import com.wyc.log.SystemLog;
@@ -38,6 +39,7 @@ public class UserController {
 	public ModelAndView login(HttpServletRequest req){
 		String error=null;
 		String exceptionClassName = (String)req.getAttribute("shiroLoginFailure");
+//		System.out.println("1111");
         if(UnknownAccountException.class.getName().equals(exceptionClassName)) {
             error = "账号错误!";
         } else if(IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
@@ -64,9 +66,13 @@ public class UserController {
 	@RequestMapping("/add")
 	@ResponseBody
 	@SystemLog(module = "用户管理", methods = "添加用户")
-	public User addUser(User user,Long...roleIds){
-		userService.addUser(user, roleIds);
-		return user;
+	public Object addUser(User user,Long...roleIds){
+		String password = user.getPassword();
+		if(validPwd(password)) {
+			userService.addUser(user, roleIds);
+			return user;
+		}
+		return "密码不符合规范";
 	}
 	
 	@RequiresPermissions("user:showroles")
@@ -107,5 +113,28 @@ public class UserController {
 	@SystemLog(module = "用户管理", methods = "更新用户角色")
 	public void corelationRole(Long userId,Long...roleIds){
 		userService.updateUserRoles(userId, roleIds);
+	}
+	
+
+/**
+	 * 校验密码
+	 * 1、长度不小于6位
+	 * 2、必须以字母开头
+	 * 3、必须包含特殊字符
+	 * 4、必须包含数字
+	 * @param pwd
+	 * @return
+	 */
+	public static boolean validPwd(String pwd){
+		if(StringUtils.isNullOrEmpty(pwd)){
+			return false;
+		}
+		if(pwd.length() < 6){
+			return false;
+		}
+		if(pwd.matches("^[a-zA-z](.*)") && pwd.matches("(.*)[-`=\\\\\\[\\];',./~!@#$%^&*()_+|{}:\"<>?]+(.*)") && pwd.matches("(.*)\\d+(.*)")){
+			return true;
+		}
+		return false;
 	}
 }
