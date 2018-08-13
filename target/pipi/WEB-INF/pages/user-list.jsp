@@ -81,9 +81,11 @@
 												placeholder="用户名">
 										</div>
 										<div class="form-group">
-											<label for="passwordInput">密码</label> <input type="password"
+											<label for="passwordInput">密码(长度不小于6位、以字母开头、包含特殊字符、包含数字)</label>
+											
+											 <input type="password"
 												name="password" class="form-control" id="passwordInput"
-												placeholder="密码">
+												placeholder="密码"><span class="error hidden"></span>
 										</div>
 										<label>角色选择</label>
 										<div class="roles-div"></div>
@@ -248,18 +250,24 @@
 				type:"POST",
 				dataType:"json",
 				success:function(data){
-					$("#add-user-form").modal("hide");
-					showTips("添加成功！");
+					if(data!='密码不符合规范'){
+						$("#add-user-form").modal("hide");
+						showTips("添加成功！");
+						
+						var newTr="<tr><td><input type='checkbox' name='userIds' value="+data.userId+"/></td>"+
+	                		"<td class='userid'>"+data.userId+"</td>"+
+	                		"<td class='username'>"+data.userName+"</td>"+
+	                		"<td><a href='javascript:void(0);' class='show-user-roles' >显示所有角色</a></td>"+
+		                    "<td>"+
+		                    	"<a class='glyphicon glyphicon-wrench show-userrole-form' aria-hidden='true' title='修改所有角色' href='javascript:void(0);' data-toggle='modal' data-target='#update-userrole-dialog'></a> "+
+		                    	"<a class='glyphicon glyphicon-remove delete-this-user' aria-hidden='true' title='删除用户' href='javascript:void(0);'></a>"+
+		                    "</td></tr>";
+						$(".user-list tr").eq(0).after(newTr);
+					}else{
+						$(".error").html("密码不符合规范");
+						$(".error").removeClass("hidden")
+					}
 
-					var newTr="<tr><td><input type='checkbox' name='userIds' value="+data.userId+"/></td>"+
-                		"<td class='userid'>"+data.userId+"</td>"+
-                		"<td class='username'>"+data.userName+"</td>"+
-                		"<td><a href='javascript:void(0);' class='show-user-roles' >显示所有角色</a></td>"+
-	                    "<td>"+
-	                    	"<a class='glyphicon glyphicon-wrench show-userrole-form' aria-hidden='true' title='修改所有角色' href='javascript:void(0);' data-toggle='modal' data-target='#update-userrole-dialog'></a> "+
-	                    	"<a class='glyphicon glyphicon-remove delete-this-user' aria-hidden='true' title='删除用户' href='javascript:void(0);'></a>"+
-	                    "</td></tr>";
-					$(".user-list tr").eq(0).after(newTr);
 				}
 			});
 		});

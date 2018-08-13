@@ -78,12 +78,13 @@ public class LogAopAction {
             if (method.isAnnotationPresent(SystemLog.class)) {
 //            	System.out.println(SecurityUtils.getSubject().getPrincipal());
                 
-                log.setUsername((SecurityUtils.getSubject().getPrincipal()).toString());
+                
                 SystemLog systemlog = method.getAnnotation(SystemLog.class);
                 log.setModule(systemlog.module());
                 log.setMethod(systemlog.methods());
                 try {
                     object = pjp.proceed();
+                    log.setUsername((SecurityUtils.getSubject().getPrincipal()).toString());
                     long end = System.currentTimeMillis();
                     //将计算好的时间保存在实体中
                     log.setResponse_data(""+(end-start));

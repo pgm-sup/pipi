@@ -36,6 +36,7 @@ public class UserController {
 //	private PasswordService passwordService;
 //	
 	@RequestMapping("/login")
+	@SystemLog(module = "用户管理", methods = "用户登录")
 	public ModelAndView login(HttpServletRequest req){
 		String error=null;
 		String exceptionClassName = (String)req.getAttribute("shiroLoginFailure");
